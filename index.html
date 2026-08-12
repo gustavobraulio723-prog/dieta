@@ -28,7 +28,6 @@
   #fatal-error h2 { color: #ff8a70; font-size: 15px; margin: 0 0 10px; }
 </style>
 
-<!-- React 18, pinned exact version, UMD production builds -->
 <script crossorigin src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
 <script crossorigin src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
 </head>
@@ -95,7 +94,7 @@ const PHASES = {
   minicut: {
     key: "minicut",
     label: "Mini-cut",
-    sub: "reduzir mais o % de gordura antes do bulk",
+    sub: "reduzir % de gordura antes do bulk",
     accent: "#E8552A",
     accentSoft: "rgba(232,85,42,0.14)",
     proteinPerKg: 2.3,
@@ -155,22 +154,22 @@ function calcWater(weightKg) {
   return { min: Math.round(weightKg * 35) / 1e3, max: Math.round(weightKg * 40) / 1e3 };
 }
 const DESSERT_KCAL = 300;
-const DESSERT_ITEM = "Shake: iogurte, morango congelado, whey, açúcar e creatina";
+const DESSERT_ITEM = "Shake: 170g iogurte, 150g morango congelado, 30g whey, 15g açúcar e creatina";
 const WEEK_DAYS = ["Seg", "Ter", "Qua", "Qui", "Sex", "S\xE1b", "Dom"];
 const MEAL_TEMPLATES = {
   train: [
-    { id: "t1", time: "07:00", title: "Caf\xE9 da manh\xE3", items: "3 ovos inteiros, 5 claras mexidas, 30g aveia, 100g iogurte de morango", prop: 0.28 },
-    { id: "t3", time: "12:30", title: "Almo\xE7o", items: "220g tilápia/peixe branco grelhado, 90g arroz branco, salada grande \xE0 vontade, 1/2 colher de sopa de azeite", prop: 0.28 },
-    { id: "t4", time: "15:30", title: "Pr\xE9-treino", items: "30g aveia, 100g banana grande, 50g iogurte de morango", prop: 0.14 },
-    { id: "t5", time: "17:30", title: "P\xF3s-treino", items: "100g tilápia/peixe branco grelhado, 70g arroz branco", prop: 0.14 },
-    { id: "t6", time: "19:30", title: "Jantar", items: "150g tilápia/peixe branco grelhado, 40g arroz branco, legumes no vapor \xE0 vontade", prop: 0.16 },
+    { id: "t1", time: "07:00", title: "Caf\xE9 da manh\xE3", items: "3 ovos inteiros, 5 claras mexidas, 30g aveia, 100g iogurte de morango", prop: 0.24 },
+    { id: "t3", time: "12:30", title: "Almo\xE7o", items: "220g til\xE1pia ou peixe branco grelhado, 90g arroz branco, salada grande \xE0 vontade, 1/2 colher de sopa de azeite", prop: 0.30 },
+    { id: "t4", time: "15:30", title: "Pr\xE9-treino", items: "30g aveia, 100g banana grande, 50g iogurte de morango", prop: 0.13 },
+    { id: "t5", time: "17:30", title: "P\xF3s-treino", items: "130g til\xE1pia ou peixe branco grelhado, 70g arroz branco", prop: 0.13 },
+    { id: "t6", time: "19:30", title: "Jantar", items: "200g til\xE1pia ou peixe branco grelhado, 40g arroz branco, legumes no vapor \xE0 vontade", prop: 0.20 },
     { id: "t7", time: "21:00", title: "Sobremesa", items: DESSERT_ITEM, dessert: true }
   ],
   rest: [
-    { id: "r1", time: "07:00", title: "Caf\xE9 da manh\xE3", items: "3 ovos inteiros, 5 claras mexidas, 30g aveia, 100g iogurte de morango", prop: 0.32 },
-    { id: "r3", time: "12:30", title: "Almo\xE7o", items: "220g tilápia/peixe branco grelhado, 90g arroz branco, salada grande \xE0 vontade, 1/2 colher de sopa de azeite", prop: 0.36 },
-    { id: "r4", time: "16:00", title: "Lanche da tarde", items: "iogurte natural (200g) + 20g castanhas + 1 banana", prop: 0.14 },
-    { id: "r5", time: "19:30", title: "Jantar", items: "150g tilápia/peixe branco grelhado, 40g arroz branco, legumes \xE0 vontade", prop: 0.18 },
+    { id: "r1", time: "07:00", title: "Caf\xE9 da manh\xE3", items: "3 ovos inteiros, 5 claras mexidas, 30g aveia, 100g iogurte de morango", prop: 0.27 },
+    { id: "r3", time: "12:30", title: "Almo\xE7o", items: "220g til\xE1pia ou peixe branco grelhado, 90g arroz branco, salada grande \xE0 vontade, 1/2 colher de sopa de azeite", prop: 0.34 },
+    { id: "r4", time: "16:00", title: "Lanche da tarde", items: "iogurte natural (200g) + 20g castanhas + 1 banana", prop: 0.17 },
+    { id: "r5", time: "19:30", title: "Jantar", items: "200g til\xE1pia ou peixe branco grelhado, 40g arroz branco, legumes \xE0 vontade", prop: 0.22 },
     { id: "r6", time: "21:00", title: "Sobremesa", items: DESSERT_ITEM, dessert: true }
   ]
 };
@@ -200,7 +199,7 @@ const SUB_GROUPS = {
     groups: [
       {
         title: "Prote\xEDna (~363 kcal)",
-        options: ["Frango grelhado \u2014 220g (68g prote\xEDna)", "Carne magra (patinho/lagarto) \u2014 220g (72g prote\xEDna)", "Peixe branco grelhado \u2014 285g (74g prote\xEDna)", "Ovo inteiro \u2014 5 un (30g prote\xEDna)"]
+        options: ["Til\xE1pia/peixe branco grelhado \u2014 220g", "Carne magra (patinho/lagarto) \u2014 220g", "Frango grelhado \u2014 220g", "Ovo inteiro \u2014 5 un"]
       },
       { title: "Carboidrato (~117 kcal)", options: ["Arroz branco \u2014 90g", "Batata inglesa (airfryer) \u2014 125g", "Batata doce \u2014 135g"] },
       { title: "1/2 colher de sopa de azeite (~63 kcal)", options: ["7g \xF3leo de soja/girassol", "9g manteiga (~1\xBD colher de ch\xE1)", "7g \xF3leo de coco"] }
@@ -218,7 +217,7 @@ const SUB_GROUPS = {
     groups: [
       {
         title: "Prote\xEDna (~165 kcal)",
-        options: ["Frango grelhado \u2014 100g (31g prote\xEDna)", "Carne magra \u2014 100g (33g prote\xEDna)", "Peixe branco grelhado \u2014 130g (34g prote\xEDna)", "Ovo inteiro \u2014 2 a 3 un (15-18g prote\xEDna)"]
+        options: ["Til\xE1pia/peixe branco grelhado \u2014 130g", "Carne magra \u2014 100g", "Frango grelhado \u2014 100g", "Ovo inteiro \u2014 2 a 3 un"]
       },
       { title: "Carboidrato (~91 kcal)", options: ["Arroz branco \u2014 70g", "Batata inglesa (airfryer) \u2014 95g", "Batata doce \u2014 105g"] }
     ]
@@ -227,7 +226,7 @@ const SUB_GROUPS = {
     groups: [
       {
         title: "Prote\xEDna (~254 kcal)",
-        options: ["Frango grelhado \u2014 150g (46g prote\xEDna)", "Carne magra \u2014 155g (51g prote\xEDna)", "Peixe branco grelhado \u2014 200g (52g prote\xEDna)", "Ovo inteiro \u2014 3 a 4 un (18-24g prote\xEDna)"]
+        options: ["Til\xE1pia/peixe branco grelhado \u2014 200g", "Carne magra \u2014 155g", "Frango grelhado \u2014 150g", "Ovo inteiro \u2014 3 a 4 un"]
       },
       { title: "Carboidrato (~52 kcal)", options: ["Arroz branco \u2014 40g", "Batata inglesa (airfryer) \u2014 55g", "Batata doce \u2014 60g"] }
     ],
@@ -235,8 +234,11 @@ const SUB_GROUPS = {
   },
   sobremesa: {
     groups: [
-      { title: "170g iogurte de morango (~130 kcal)", options: ["213ml leite integral", "213g iogurte natural", "134g iogurte grego"] },
-      { title: "10g aveia/granola (~40 kcal)", options: ["13g mel (1 colher de sopa rasa)", "9g biscoito integral"] }
+      { title: "170g iogurte (~120 kcal)", options: ["170g iogurte natural", "170g iogurte grego light"] },
+      { title: "150g morango congelado (~50 kcal)", options: ["150g morango in natura", "100g banana"] },
+      { title: "30g whey (~120 kcal)", options: ["30g whey"] },
+      { title: "15g a\xE7\xFAcar (~60 kcal)", options: ["10g a\xE7\xFAcar", "15g mel"] },
+      { title: "Creatina (0 kcal)", options: ["Creatina"] }
     ]
   }
 };
@@ -342,6 +344,46 @@ function todayISO() {
 function daysBetween(a, b) {
   return Math.floor((new Date(b) - new Date(a)) / (1e3 * 60 * 60 * 24));
 }
+function isoDateOffset(offsetDays) {
+  const d = /* @__PURE__ */ new Date();
+  d.setDate(d.getDate() + offsetDays);
+  return d.toISOString().slice(0, 10);
+}
+function last7Days() {
+  const arr = [];
+  for (let i = 6; i >= 0; i--) arr.push(isoDateOffset(-i));
+  return arr;
+}
+function computeActiveDates(state) {
+  const set = /* @__PURE__ */ new Set();
+  (state.weightLogs || []).forEach((l) => set.add(l.date));
+  Object.entries(state.mealChecks || {}).forEach(([date, checks]) => {
+    if (Object.values(checks || {}).some(Boolean)) set.add(date);
+  });
+  return set;
+}
+function computeStreak(activeSet) {
+  let streak = 0;
+  let cursorOffset = 0;
+  if (!activeSet.has(isoDateOffset(0))) cursorOffset = -1;
+  while (activeSet.has(isoDateOffset(cursorOffset))) {
+    streak++;
+    cursorOffset -= 1;
+  }
+  return streak;
+}
+function computeBestStreak(activeSet) {
+  const dates = Array.from(activeSet).sort();
+  let best = 0;
+  let cur = 0;
+  let prev = null;
+  dates.forEach((d) => {
+    cur = prev && daysBetween(prev, d) === 1 ? cur + 1 : 1;
+    if (cur > best) best = cur;
+    prev = d;
+  });
+  return best;
+}
 const DEFAULT_STATE = {
   profile: { heightCm: 178, age: 20, startWeight: 100 },
   phase: "minicut",
@@ -351,6 +393,7 @@ const DEFAULT_STATE = {
   mealChoices: {},
   mealActuals: {},
   hormoneLogs: [],
+  waterLogs: {},
   substances: [
     { id: "s1", name: "Trembolona Acetato", mgPerMl: 100 },
     { id: "s2", name: "Testosterona", mgPerMl: 250 }
@@ -404,6 +447,7 @@ function RecomporApp() {
             mealChoices: parsed.mealChoices || {},
             mealActuals: parsed.mealActuals || {},
             hormoneLogs: parsed.hormoneLogs || [],
+            waterLogs: parsed.waterLogs || {},
             substances: parsed.substances && parsed.substances.length ? parsed.substances : DEFAULT_STATE.substances
           };
           stateRef.current = merged;
@@ -513,6 +557,24 @@ function RecomporApp() {
   });
   const adjustableMeals = mealPlan.filter((m) => mealActualKcals[m.id] == null && !todayChecks[m.id]);
   const adjustablePropSum = adjustableMeals.reduce((s, m) => s + (m.prop || 0), 0) || 1;
+  const kcalTargetToday = dayType === "train" ? macros.kcalTrain : macros.kcalRest;
+  const kcalEatenToday = mealPlan.filter((m) => todayChecks[m.id]).reduce((s, m) => s + (mealActualKcals[m.id] ?? m.kcal), 0);
+  const kcalRemainingToday = kcalTargetToday - kcalEatenToday;
+  const eatenRatio = kcalTargetToday > 0 ? kcalEatenToday / kcalTargetToday : 0;
+  const carbTargetToday = dayType === "train" ? macros.carbTrain : macros.carbRest;
+  const proteinEatenToday = Math.round(macros.protein * eatenRatio);
+  const carbEatenToday = Math.round(carbTargetToday * eatenRatio);
+  const fatEatenToday = Math.round(macros.fat * eatenRatio);
+  const activeDates = computeActiveDates(state);
+  const currentStreak = computeStreak(activeDates);
+  const bestStreak = computeBestStreak(activeDates);
+  const waterTodayMl = state.waterLogs?.[todayKey] || 0;
+  const waterTargetMl = Math.round((water.min + water.max) / 2 * 1e3);
+  const week = last7Days();
+  const weekWeights = sortedLogs.filter((l) => week.includes(l.date)).map((l) => l.weight);
+  const weekAvgWeight = weekWeights.length ? weekWeights.reduce((a, b) => a + b, 0) / weekWeights.length : null;
+  const activeDaysThisWeek = week.filter((d) => activeDates.has(d)).length;
+  const mealsCheckedThisWeek = week.reduce((s, d) => s + Object.values(state.mealChecks?.[d] || {}).filter(Boolean).length, 0);
   function toggleMeal(id) {
     persist((prev) => {
       const dayChecks = { ...prev.mealChecks?.[todayKey] || {} };
@@ -575,6 +637,19 @@ function RecomporApp() {
     });
     setNewWeight("");
   }
+  function addWater(ml) {
+    persist((prev) => {
+      const current = prev.waterLogs?.[todayKey] || 0;
+      return { ...prev, waterLogs: { ...prev.waterLogs || {}, [todayKey]: Math.max(0, current + ml) } };
+    });
+  }
+  function resetWaterToday() {
+    persist((prev) => {
+      const next = { ...prev.waterLogs || {} };
+      delete next[todayKey];
+      return { ...prev, waterLogs: next };
+    });
+  }
   function advancePhase() {
     if (!confirmAdvance) {
       setConfirmAdvance(true);
@@ -633,6 +708,7 @@ function RecomporApp() {
           .rc-grid { grid-template-columns: 1fr !important; }
           .rc-macros { grid-template-columns: 1fr 1fr !important; }
           .rc-hormone-grid { grid-template-columns: repeat(7, minmax(64px, 1fr)) !important; overflow-x: auto; }
+          .rc-weekgrid { gap: 6px !important; }
         }
       `), storageMissing && /* @__PURE__ */ React.createElement("div", { style: styles.topBanner }, "armazenamento n\xE3o dispon\xEDvel neste ambiente \u2014 as altera\xE7\xF5es n\xE3o v\xE3o persistir ao fechar e reabrir o app"), /* @__PURE__ */ React.createElement("div", { style: styles.diagRow }, /* @__PURE__ */ React.createElement("button", { className: "rc-btn", onClick: runDiagnostic, style: styles.diagBtn }, "testar conex\xE3o com armazenamento"), diagResult && /* @__PURE__ */ React.createElement("span", { style: { ...styles.diagResult, color: diagResult.startsWith("\u2713") ? "#6FA96F" : "#E8552A" } }, diagResult)), /* @__PURE__ */ React.createElement("div", { style: styles.header }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: styles.eyebrow }, "CICLO DE RECOMPOSI\xC7\xC3O"), /* @__PURE__ */ React.createElement("h1", { style: styles.title }, "RECOMPOR")), /* @__PURE__ */ React.createElement("div", { style: styles.phasePillRow }, PHASE_ORDER.map((k, i) => /* @__PURE__ */ React.createElement("div", { key: k, style: styles.pillWrap }, /* @__PURE__ */ React.createElement(
     "div",
@@ -646,7 +722,16 @@ function RecomporApp() {
     },
     i < phaseIndex ? "\u2713 " : "",
     PHASES[k].label
-  ), i < PHASE_ORDER.length - 1 && /* @__PURE__ */ React.createElement("div", { style: styles.pillConnector }))))), /* @__PURE__ */ React.createElement("div", { style: { ...styles.hero, borderColor: phase.accent } }, /* @__PURE__ */ React.createElement("div", { style: styles.heroLeft }, /* @__PURE__ */ React.createElement("div", { style: styles.heroLabel }, "FASE ATUAL"), /* @__PURE__ */ React.createElement("div", { style: { ...styles.heroPhase, color: phase.accent } }, phase.label.toUpperCase()), /* @__PURE__ */ React.createElement("div", { style: styles.heroSub }, phase.sub), /* @__PURE__ */ React.createElement("div", { style: styles.heroMeta }, "dia ", daysInPhase + 1, " \xB7 alvo ", phase.durationHint)), /* @__PURE__ */ React.createElement("div", { style: styles.heroDivider }), /* @__PURE__ */ React.createElement("div", { style: styles.heroRight }, /* @__PURE__ */ React.createElement("div", { style: styles.heroLabel }, "PESO ATUAL"), /* @__PURE__ */ React.createElement("div", { style: styles.readoutRow }, /* @__PURE__ */ React.createElement("span", { style: styles.readoutNum }, currentWeight.toFixed(1)), /* @__PURE__ */ React.createElement("span", { style: styles.readoutUnit }, "kg")), /* @__PURE__ */ React.createElement("div", { style: { ...styles.deltaTag, color: delta > 0 ? "#E8552A" : delta < 0 ? "#6FA96F" : "#9A9D9F" } }, delta > 0 ? "\u25B2" : delta < 0 ? "\u25BC" : "\u2014", " ", Math.abs(delta).toFixed(1), "kg desde o in\xEDcio do registro"))), /* @__PURE__ */ React.createElement("div", { className: "rc-grid", style: styles.grid }, /* @__PURE__ */ React.createElement("div", { style: styles.col }, /* @__PURE__ */ React.createElement("div", { style: styles.card }, /* @__PURE__ */ React.createElement("div", { style: styles.cardHeaderRow }, /* @__PURE__ */ React.createElement("div", { style: styles.cardTitle }, "Metas de hoje"), /* @__PURE__ */ React.createElement("div", { style: styles.dayToggle }, /* @__PURE__ */ React.createElement("button", { className: "rc-btn", onClick: () => setDayType((d) => d === "train" ? "rest" : "train"), style: styles.arrowBtn, "aria-label": "dia anterior" }, "\u2039"), /* @__PURE__ */ React.createElement("span", { style: { ...styles.dayTypeLabel, color: phase.accent } }, dayType === "train" ? "Treino" : "Descanso"), /* @__PURE__ */ React.createElement("button", { className: "rc-btn", onClick: () => setDayType((d) => d === "train" ? "rest" : "train"), style: styles.arrowBtn, "aria-label": "pr\xF3ximo dia" }, "\u203A"))), /* @__PURE__ */ React.createElement("div", { style: styles.kcalRow }, /* @__PURE__ */ React.createElement("span", { style: styles.kcalNum }, dayType === "train" ? macros.kcalTrain : macros.kcalRest), /* @__PURE__ */ React.createElement("span", { style: styles.kcalUnit }, "kcal"), /* @__PURE__ */ React.createElement("span", { style: styles.tdeeNote }, "manuten\xE7\xE3o est. ", macros.tdee, " kcal")), /* @__PURE__ */ React.createElement("div", { className: "rc-macros", style: styles.macroGrid }, /* @__PURE__ */ React.createElement(MacroBlock, { label: "Prote\xEDna", value: macros.protein, unit: "g", accent: phase.accent }), /* @__PURE__ */ React.createElement(MacroBlock, { label: "Carbo", value: dayType === "train" ? macros.carbTrain : macros.carbRest, unit: "g", accent: phase.accent }), /* @__PURE__ */ React.createElement(MacroBlock, { label: "Gordura", value: macros.fat, unit: "g", accent: phase.accent })), /* @__PURE__ */ React.createElement("div", { style: styles.waterRow }, /* @__PURE__ */ React.createElement("span", { style: styles.waterLabel }, "\xC1GUA"), /* @__PURE__ */ React.createElement("span", { style: styles.waterVal }, water.min.toFixed(1), "\u2013", water.max.toFixed(1), " L"), /* @__PURE__ */ React.createElement("span", { style: styles.waterHint }, "35\u201340ml/kg \xB7 n\xE3o reduzir mesmo no d\xE9ficit"))), /* @__PURE__ */ React.createElement("div", { style: styles.card }, /* @__PURE__ */ React.createElement("div", { style: styles.cardTitle }, "Pr\xF3xima fase"), /* @__PURE__ */ React.createElement("div", { style: styles.nextPhaseRow }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { ...styles.nextPhaseLabel, color: PHASES[phase.next].accent } }, PHASES[phase.next].label), /* @__PURE__ */ React.createElement("div", { style: styles.nextPhaseSub }, PHASES[phase.next].sub)), /* @__PURE__ */ React.createElement("button", { className: "rc-btn", onClick: advancePhase, style: { ...styles.advanceBtn, borderColor: confirmAdvance ? "#E8552A" : "#3A3D42" } }, confirmAdvance ? "confirmar avan\xE7o" : "avan\xE7ar fase \u2192")))), /* @__PURE__ */ React.createElement("div", { style: styles.col }, /* @__PURE__ */ React.createElement("div", { style: styles.card }, /* @__PURE__ */ React.createElement("div", { style: styles.cardTitle }, "Registrar peso"), /* @__PURE__ */ React.createElement("div", { style: styles.logForm }, /* @__PURE__ */ React.createElement(
+  ), i < PHASE_ORDER.length - 1 && /* @__PURE__ */ React.createElement("div", { style: styles.pillConnector }))))), /* @__PURE__ */ React.createElement("div", { style: { ...styles.hero, borderColor: phase.accent } }, /* @__PURE__ */ React.createElement("div", { style: styles.heroLeft }, /* @__PURE__ */ React.createElement("div", { style: styles.heroLabel }, "FASE ATUAL"), /* @__PURE__ */ React.createElement("div", { style: { ...styles.heroPhase, color: phase.accent } }, phase.label.toUpperCase()), /* @__PURE__ */ React.createElement("div", { style: styles.heroSub }, phase.sub), /* @__PURE__ */ React.createElement("div", { style: styles.heroMeta }, "dia ", daysInPhase + 1, " \xB7 alvo ", phase.durationHint)), /* @__PURE__ */ React.createElement("div", { style: styles.heroDivider }), /* @__PURE__ */ React.createElement("div", { style: styles.heroRight }, /* @__PURE__ */ React.createElement("div", { style: styles.heroLabel }, "PESO ATUAL"), /* @__PURE__ */ React.createElement("div", { style: styles.readoutRow }, /* @__PURE__ */ React.createElement("span", { style: styles.readoutNum }, currentWeight.toFixed(1)), /* @__PURE__ */ React.createElement("span", { style: styles.readoutUnit }, "kg")), /* @__PURE__ */ React.createElement("div", { style: { ...styles.deltaTag, color: delta > 0 ? "#E8552A" : delta < 0 ? "#6FA96F" : "#9A9D9F" } }, delta > 0 ? "\u25B2" : delta < 0 ? "\u25BC" : "\u2014", " ", Math.abs(delta).toFixed(1), "kg desde o in\xEDcio do registro"))), /* @__PURE__ */ React.createElement("div", { style: styles.card2 }, /* @__PURE__ */ React.createElement("div", { style: styles.cardTitle }, "Esta semana"), /* @__PURE__ */ React.createElement("div", { className: "rc-weekgrid", style: styles.weekGrid }, /* @__PURE__ */ React.createElement("div", { style: styles.weekStat }, /* @__PURE__ */ React.createElement("div", { style: styles.weekStatLabel }, "\u{1F525} streak"), /* @__PURE__ */ React.createElement("div", { style: { ...styles.weekStatValue, color: phase.accent } }, currentStreak, "d"), /* @__PURE__ */ React.createElement("div", { style: styles.weekStatSub }, "recorde: ", bestStreak, "d")), /* @__PURE__ */ React.createElement("div", { style: styles.weekStat }, /* @__PURE__ */ React.createElement("div", { style: styles.weekStatLabel }, "peso m\xE9dio (7d)"), /* @__PURE__ */ React.createElement("div", { style: styles.weekStatValue }, weekAvgWeight != null ? weekAvgWeight.toFixed(1) + "kg" : "\u2014"), /* @__PURE__ */ React.createElement("div", { style: styles.weekStatSub }, weekWeights.length, " registro(s)")), /* @__PURE__ */ React.createElement("div", { style: styles.weekStat }, /* @__PURE__ */ React.createElement("div", { style: styles.weekStatLabel }, "dias ativos"), /* @__PURE__ */ React.createElement("div", { style: styles.weekStatValue }, activeDaysThisWeek, "/7"), /* @__PURE__ */ React.createElement("div", { style: styles.weekStatSub }, mealsCheckedThisWeek, " refei\xE7\xF5es marcadas"))), /* @__PURE__ */ React.createElement("div", { style: styles.waterSection }, /* @__PURE__ */ React.createElement("div", { style: styles.waterSectionTop }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("span", { style: styles.dailySummaryNum }, (waterTodayMl / 1e3).toFixed(2)), /* @__PURE__ */ React.createElement("span", { style: styles.dailySummaryUnit }, " / ", (waterTargetMl / 1e3).toFixed(1), " L hoje")), waterTodayMl > 0 && /* @__PURE__ */ React.createElement("button", { className: "rc-btn", onClick: resetWaterToday, style: styles.subResetBtn }, "zerar")), /* @__PURE__ */ React.createElement("div", { style: styles.dailyProgressTrack }, /* @__PURE__ */ React.createElement(
+    "div",
+    {
+      style: {
+        ...styles.dailyProgressFill,
+        width: `${clamp(waterTodayMl / waterTargetMl * 100, 0, 100)}%`,
+        background: "#4A90D9"
+      }
+    }
+  )), /* @__PURE__ */ React.createElement("div", { style: styles.waterBtnRow }, /* @__PURE__ */ React.createElement("button", { className: "rc-btn", onClick: () => addWater(250), style: styles.waterBtn }, "+250ml"), /* @__PURE__ */ React.createElement("button", { className: "rc-btn", onClick: () => addWater(500), style: styles.waterBtn }, "+500ml"), /* @__PURE__ */ React.createElement("button", { className: "rc-btn", onClick: () => addWater(-250), style: styles.waterBtn }, "\u2212250ml")))), /* @__PURE__ */ React.createElement("div", { className: "rc-grid", style: styles.grid }, /* @__PURE__ */ React.createElement("div", { style: styles.col }, /* @__PURE__ */ React.createElement("div", { style: styles.card }, /* @__PURE__ */ React.createElement("div", { style: styles.cardHeaderRow }, /* @__PURE__ */ React.createElement("div", { style: styles.cardTitle }, "Metas de hoje"), /* @__PURE__ */ React.createElement("div", { style: styles.dayToggle }, /* @__PURE__ */ React.createElement("button", { className: "rc-btn", onClick: () => setDayType((d) => d === "train" ? "rest" : "train"), style: styles.arrowBtn, "aria-label": "dia anterior" }, "\u2039"), /* @__PURE__ */ React.createElement("span", { style: { ...styles.dayTypeLabel, color: phase.accent } }, dayType === "train" ? "Treino" : "Descanso"), /* @__PURE__ */ React.createElement("button", { className: "rc-btn", onClick: () => setDayType((d) => d === "train" ? "rest" : "train"), style: styles.arrowBtn, "aria-label": "pr\xF3ximo dia" }, "\u203A"))), /* @__PURE__ */ React.createElement("div", { style: styles.kcalRow }, /* @__PURE__ */ React.createElement("span", { style: styles.kcalNum }, dayType === "train" ? macros.kcalTrain : macros.kcalRest), /* @__PURE__ */ React.createElement("span", { style: styles.kcalUnit }, "kcal"), /* @__PURE__ */ React.createElement("span", { style: styles.tdeeNote }, "manuten\xE7\xE3o est. ", macros.tdee, " kcal")), /* @__PURE__ */ React.createElement("div", { className: "rc-macros", style: styles.macroGrid }, /* @__PURE__ */ React.createElement(MacroBlock, { label: "Prote\xEDna", value: macros.protein, unit: "g", accent: phase.accent }), /* @__PURE__ */ React.createElement(MacroBlock, { label: "Carbo", value: dayType === "train" ? macros.carbTrain : macros.carbRest, unit: "g", accent: phase.accent }), /* @__PURE__ */ React.createElement(MacroBlock, { label: "Gordura", value: macros.fat, unit: "g", accent: phase.accent })), /* @__PURE__ */ React.createElement("div", { style: styles.waterRow }, /* @__PURE__ */ React.createElement("span", { style: styles.waterLabel }, "\xC1GUA"), /* @__PURE__ */ React.createElement("span", { style: styles.waterVal }, water.min.toFixed(1), "\u2013", water.max.toFixed(1), " L"), /* @__PURE__ */ React.createElement("span", { style: styles.waterHint }, "35\u201340ml/kg \xB7 n\xE3o reduzir mesmo no d\xE9ficit"))), /* @__PURE__ */ React.createElement("div", { style: styles.card }, /* @__PURE__ */ React.createElement("div", { style: styles.cardTitle }, "Pr\xF3xima fase"), /* @__PURE__ */ React.createElement("div", { style: styles.nextPhaseRow }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: { ...styles.nextPhaseLabel, color: PHASES[phase.next].accent } }, PHASES[phase.next].label), /* @__PURE__ */ React.createElement("div", { style: styles.nextPhaseSub }, PHASES[phase.next].sub)), /* @__PURE__ */ React.createElement("button", { className: "rc-btn", onClick: advancePhase, style: { ...styles.advanceBtn, borderColor: confirmAdvance ? "#E8552A" : "#3A3D42" } }, confirmAdvance ? "confirmar avan\xE7o" : "avan\xE7ar fase \u2192")))), /* @__PURE__ */ React.createElement("div", { style: styles.col }, /* @__PURE__ */ React.createElement("div", { style: styles.card }, /* @__PURE__ */ React.createElement("div", { style: styles.cardTitle }, "Registrar peso"), /* @__PURE__ */ React.createElement("div", { style: styles.logForm }, /* @__PURE__ */ React.createElement(
     "input",
     {
       className: "rc-input",
@@ -746,7 +831,16 @@ function RecomporApp() {
       onKeyDown: (e) => e.key === "Enter" && addHormoneLog(),
       style: styles.doseInput
     }
-  ), /* @__PURE__ */ React.createElement("button", { className: "rc-btn", onClick: addHormoneLog, style: { ...styles.addBtn, borderColor: phase.accent, color: phase.accent } }, "add")), hormoneMl && (state.substances || []).find((s) => s.id === hormoneSubstanceId) && /* @__PURE__ */ React.createElement("div", { style: styles.mgPreview }, "= ", Math.round(parseFloat(hormoneMl.replace(",", ".") || 0) * (state.substances.find((s) => s.id === hormoneSubstanceId)?.mgPerMl || 0) * 10) / 10, "mg"), /* @__PURE__ */ React.createElement("div", { style: styles.hormoneListLabel }, "Lista cronol\xF3gica"), /* @__PURE__ */ React.createElement("div", { className: "rc-scroll", style: styles.logList }, (state.hormoneLogs || []).slice().sort((a, b) => WEEK_DAYS.indexOf(a.day) - WEEK_DAYS.indexOf(b.day)).map((h) => /* @__PURE__ */ React.createElement("div", { key: h.id, style: styles.logRow }, /* @__PURE__ */ React.createElement("span", { style: styles.logDate }, h.day), /* @__PURE__ */ React.createElement("span", { style: styles.logWeight }, h.substance, " \xB7 ", h.ml, "ml (", h.mg, "mg)"), /* @__PURE__ */ React.createElement("button", { className: "rc-btn", onClick: () => deleteHormoneLog(h.id), style: styles.logDelete, "aria-label": "remover registro" }, "\xD7"))))), /* @__PURE__ */ React.createElement("div", { style: styles.card2 }, /* @__PURE__ */ React.createElement("div", { style: styles.cardHeaderRow }, /* @__PURE__ */ React.createElement("div", { style: styles.cardTitle }, "Card\xE1pio de hoje \xB7 ", dayType === "train" ? "dia de treino" : "dia de descanso"), /* @__PURE__ */ React.createElement("div", { style: styles.mealsCounter }, mealsEaten, "/", mealPlan.length, " feitas")), /* @__PURE__ */ React.createElement("div", { style: styles.cardHint }, "toque numa refei\xE7\xE3o pra marcar como feita \xB7 toque em \u{1F501} pra trocar um alimento ou ajustar a quantidade real que voc\xEA comeu \u2014 o resto do dia reajusta sozinho"), /* @__PURE__ */ React.createElement("div", { style: styles.timeline }, mealPlan.map((m, i) => {
+  ), /* @__PURE__ */ React.createElement("button", { className: "rc-btn", onClick: addHormoneLog, style: { ...styles.addBtn, borderColor: phase.accent, color: phase.accent } }, "add")), hormoneMl && (state.substances || []).find((s) => s.id === hormoneSubstanceId) && /* @__PURE__ */ React.createElement("div", { style: styles.mgPreview }, "= ", Math.round(parseFloat(hormoneMl.replace(",", ".") || 0) * (state.substances.find((s) => s.id === hormoneSubstanceId)?.mgPerMl || 0) * 10) / 10, "mg"), /* @__PURE__ */ React.createElement("div", { style: styles.hormoneListLabel }, "Lista cronol\xF3gica"), /* @__PURE__ */ React.createElement("div", { className: "rc-scroll", style: styles.logList }, (state.hormoneLogs || []).slice().sort((a, b) => WEEK_DAYS.indexOf(a.day) - WEEK_DAYS.indexOf(b.day)).map((h) => /* @__PURE__ */ React.createElement("div", { key: h.id, style: styles.logRow }, /* @__PURE__ */ React.createElement("span", { style: styles.logDate }, h.day), /* @__PURE__ */ React.createElement("span", { style: styles.logWeight }, h.substance, " \xB7 ", h.ml, "ml (", h.mg, "mg)"), /* @__PURE__ */ React.createElement("button", { className: "rc-btn", onClick: () => deleteHormoneLog(h.id), style: styles.logDelete, "aria-label": "remover registro" }, "\xD7"))))), /* @__PURE__ */ React.createElement("div", { style: styles.card2 }, /* @__PURE__ */ React.createElement("div", { style: styles.cardHeaderRow }, /* @__PURE__ */ React.createElement("div", { style: styles.cardTitle }, "Card\xE1pio de hoje \xB7 ", dayType === "train" ? "dia de treino" : "dia de descanso"), /* @__PURE__ */ React.createElement("div", { style: styles.mealsCounter }, mealsEaten, "/", mealPlan.length, " feitas")), /* @__PURE__ */ React.createElement("div", { style: styles.cardHint }, "toque numa refei\xE7\xE3o pra marcar como feita \xB7 toque em \u{1F501} pra trocar um alimento ou ajustar a quantidade real que voc\xEA comeu \u2014 o resto do dia reajusta sozinho"), /* @__PURE__ */ React.createElement("div", { style: styles.dailySummary }, /* @__PURE__ */ React.createElement("div", { style: styles.dailySummaryTop }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("span", { style: styles.dailySummaryNum }, kcalEatenToday), /* @__PURE__ */ React.createElement("span", { style: styles.dailySummaryUnit }, " / ", kcalTargetToday, " kcal comidas")), /* @__PURE__ */ React.createElement("div", { style: { ...styles.dailySummaryRemaining, color: kcalRemainingToday < 0 ? "#E8552A" : "#6FA96F" } }, kcalRemainingToday < 0 ? `${Math.abs(Math.round(kcalRemainingToday))} kcal acima` : `${Math.round(kcalRemainingToday)} kcal dispon\xEDveis`)), /* @__PURE__ */ React.createElement("div", { style: styles.dailyProgressTrack }, /* @__PURE__ */ React.createElement(
+    "div",
+    {
+      style: {
+        ...styles.dailyProgressFill,
+        width: `${clamp(eatenRatio * 100, 0, 100)}%`,
+        background: eatenRatio > 1 ? "#E8552A" : phase.accent
+      }
+    }
+  )), /* @__PURE__ */ React.createElement("div", { className: "rc-macros", style: styles.dailyMacroRow }, /* @__PURE__ */ React.createElement(DailyMacroChip, { label: "Prote\xEDna", eaten: proteinEatenToday, target: macros.protein, accent: phase.accent }), /* @__PURE__ */ React.createElement(DailyMacroChip, { label: "Carbo", eaten: carbEatenToday, target: carbTargetToday, accent: phase.accent }), /* @__PURE__ */ React.createElement(DailyMacroChip, { label: "Gordura", eaten: fatEatenToday, target: macros.fat, accent: phase.accent }))), /* @__PURE__ */ React.createElement("div", { style: styles.timeline }, mealPlan.map((m, i) => {
     const checked = !!todayChecks[m.id];
     const subGroup = MEAL_SUB_GROUP[m.id] ? SUB_GROUPS[MEAL_SUB_GROUP[m.id]] : null;
     const isExpanded = expandedMeal === m.id;
@@ -858,6 +952,11 @@ function RecomporApp() {
 }
 function MacroBlock({ label, value, unit, accent }) {
   return /* @__PURE__ */ React.createElement("div", { style: styles.macroBlock }, /* @__PURE__ */ React.createElement("div", { style: styles.macroLabel }, label), /* @__PURE__ */ React.createElement("div", { style: styles.macroValueRow }, /* @__PURE__ */ React.createElement("span", { style: { ...styles.macroValue, color: accent } }, value), /* @__PURE__ */ React.createElement("span", { style: styles.macroUnit }, unit)));
+}
+function DailyMacroChip({ label, eaten, target, accent }) {
+  const ratio = target > 0 ? clamp(eaten / target, 0, 1.3) : 0;
+  const over = target > 0 && eaten > target;
+  return /* @__PURE__ */ React.createElement("div", { style: styles.dailyMacroChip }, /* @__PURE__ */ React.createElement("div", { style: styles.dailyMacroLabel }, label), /* @__PURE__ */ React.createElement("div", { style: styles.dailyMacroValueRow }, /* @__PURE__ */ React.createElement("span", { style: { ...styles.dailyMacroValue, color: over ? "#E8552A" : accent } }, eaten), /* @__PURE__ */ React.createElement("span", { style: styles.dailyMacroTarget }, "/", target, "g")), /* @__PURE__ */ React.createElement("div", { style: styles.dailyMacroTrack }, /* @__PURE__ */ React.createElement("div", { style: { ...styles.dailyMacroFill, width: `${Math.min(ratio * 100, 100)}%`, background: over ? "#E8552A" : accent } })));
 }
 const styles = {
   page: {
@@ -1067,6 +1166,39 @@ const styles = {
   },
   mealItems: { fontSize: 13, color: "#9A9D9F", marginTop: 6, lineHeight: 1.5, textAlign: "left" },
   cardHint: { fontSize: 11.5, color: "#6B6E72", marginBottom: 14, lineHeight: 1.5 },
+  dailySummary: { background: "#131417", border: "1px solid #26292E", borderRadius: 8, padding: "14px 16px", marginBottom: 20 },
+  dailySummaryTop: { display: "flex", justifyContent: "space-between", alignItems: "baseline", flexWrap: "wrap", gap: 8, marginBottom: 8 },
+  dailySummaryNum: { fontFamily: "'IBM Plex Mono', monospace", fontSize: 20, fontWeight: 600, color: "#EDECE8" },
+  dailySummaryUnit: { fontFamily: "'IBM Plex Mono', monospace", fontSize: 12, color: "#6B6E72" },
+  dailySummaryRemaining: { fontFamily: "'IBM Plex Mono', monospace", fontSize: 12.5 },
+  dailyProgressTrack: { width: "100%", height: 6, borderRadius: 3, background: "#26292E", overflow: "hidden", marginBottom: 14 },
+  dailyProgressFill: { height: "100%", borderRadius: 3, transition: "width 0.2s" },
+  dailyMacroRow: { display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 10 },
+  dailyMacroChip: {},
+  dailyMacroLabel: { fontSize: 10.5, color: "#6B6E72", marginBottom: 2 },
+  dailyMacroValueRow: { display: "flex", alignItems: "baseline", gap: 2, marginBottom: 4 },
+  dailyMacroValue: { fontFamily: "'IBM Plex Mono', monospace", fontSize: 14, fontWeight: 600 },
+  dailyMacroTarget: { fontFamily: "'IBM Plex Mono', monospace", fontSize: 11, color: "#6B6E72" },
+  dailyMacroTrack: { width: "100%", height: 4, borderRadius: 2, background: "#26292E", overflow: "hidden" },
+  dailyMacroFill: { height: "100%", borderRadius: 2 },
+  weekGrid: { display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 12, marginBottom: 20 },
+  weekStat: { background: "#131417", border: "1px solid #26292E", borderRadius: 8, padding: "12px 10px" },
+  weekStatLabel: { fontSize: 11, color: "#6B6E72", marginBottom: 4 },
+  weekStatValue: { fontFamily: "'IBM Plex Mono', monospace", fontSize: 18, fontWeight: 600, color: "#EDECE8" },
+  weekStatSub: { fontSize: 10.5, color: "#4E5155", marginTop: 3 },
+  waterSection: { borderTop: "1px solid #26292E", paddingTop: 16 },
+  waterSectionTop: { display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: 8, flexWrap: "wrap", gap: 8 },
+  waterBtnRow: { display: "flex", gap: 8, marginTop: 12, flexWrap: "wrap" },
+  waterBtn: {
+    fontFamily: "'IBM Plex Mono', monospace",
+    fontSize: 12,
+    padding: "8px 14px",
+    borderRadius: 7,
+    border: "1px solid #33363B",
+    background: "transparent",
+    color: "#4A90D9",
+    cursor: "pointer"
+  },
   swappableDot: { fontSize: 11, flexShrink: 0, opacity: 0.85 },
   customBadge: {
     fontFamily: "'IBM Plex Mono', monospace",
