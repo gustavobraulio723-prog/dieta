@@ -1,0 +1,9 @@
+{
+  "name": "Recompor",
+  "short_name": "Recompor",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#131417",
+  "theme_color": "#131417",
+  "orientation": "portrait"
+}
