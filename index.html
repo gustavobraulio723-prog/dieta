@@ -418,6 +418,7 @@ function RecomporApp() {
   const [expandedMeal, setExpandedMeal] = useState(null);
   const [showReference, setShowReference] = useState(false);
   const [actualDrafts, setActualDrafts] = useState({});
+  const importFileRef = React.useRef(null);
   const draggingIdRef = React.useRef(null);
   useEffect(() => {
     const id = FONT_LINK_ID;
@@ -437,7 +438,16 @@ function RecomporApp() {
           setState(DEFAULT_STATE);
           return;
         }
-        const res = await window.storage.get("app-state", false);
+        let res;
+        try {
+          res = await window.storage.get("recompor-app-state-v1", false);
+        } catch (_) {
+          // migra automaticamente versões antigas do app
+          res = await window.storage.get("app-state", false);
+          if (res && res.value) {
+            await window.storage.set("recompor-app-state-v1", res.value, false);
+          }
+        }
         if (res && res.value) {
           const parsed = JSON.parse(res.value);
           const merged = {
@@ -470,6 +480,17 @@ function RecomporApp() {
   const [storageMissing, setStorageMissing] = useState(false);
   const lastFailedRef = React.useRef(null);
   useEffect(() => {
+    const emergencySave = () => {
+      try {
+        if (stateRef.current) {
+          localStorage.setItem("recompor-app-state-v1", JSON.stringify(stateRef.current));
+        }
+      } catch (_) {}
+    };
+    window.addEventListener("beforeunload", emergencySave);
+    return () => window.removeEventListener("beforeunload", emergencySave);
+  }, []);
+  useEffect(() => {
     if (typeof window.storage === "undefined") setStorageMissing(true);
   }, []);
   const writeToStorage = useCallback(async (next, attempt = 1) => {
@@ -480,7 +501,7 @@ function RecomporApp() {
     }
     setSaveStatus("saving");
     try {
-      const res = await window.storage.set("app-state", JSON.stringify(next), false);
+      const res = await window.storage.set("recompor-app-state-v1", JSON.stringify(next), false);
       if (!res) throw new Error("resposta vazia do servidor");
       setSaveStatus("saved");
       setSaveError(false);
@@ -510,6 +531,60 @@ function RecomporApp() {
   function retrySave() {
     if (lastFailedRef.current) writeToStorage(lastFailedRef.current);
   }
+
+  function exportBackup() {
+    try {
+      const data = stateRef.current || state || DEFAULT_STATE;
+      const payload = {
+        app: "Recompor",
+        version: 1,
+        exportedAt: new Date().toISOString(),
+        state: data
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `recompor-backup-${todayISO()}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      setDiagResult("✓ backup JSON exportado");
+    } catch (e) {
+      setDiagResult("✗ erro ao exportar backup: " + (e?.message || e));
+    }
+  }
+
+  async function importBackupFile(file) {
+    if (!file) return;
+    try {
+      const raw = await file.text();
+      const parsed = JSON.parse(raw);
+      const imported = parsed?.state || parsed;
+      if (!imported || typeof imported !== "object") throw new Error("JSON inválido");
+      const merged = {
+        ...DEFAULT_STATE,
+        ...imported,
+        profile: { ...DEFAULT_STATE.profile, ...(imported.profile || {}) },
+        mealChecks: imported.mealChecks || {},
+        mealChoices: imported.mealChoices || {},
+        mealActuals: imported.mealActuals || {},
+        hormoneLogs: imported.hormoneLogs || [],
+        waterLogs: imported.waterLogs || {},
+        substances: imported.substances && imported.substances.length ? imported.substances : DEFAULT_STATE.substances
+      };
+      stateRef.current = merged;
+      setState(merged);
+      await writeToStorage(merged);
+      setDiagResult("✓ backup restaurado e salvo permanentemente neste navegador");
+    } catch (e) {
+      setDiagResult("✗ não foi possível importar: " + (e?.message || e));
+    } finally {
+      if (importFileRef.current) importFileRef.current.value = "";
+    }
+  }
+
   async function runDiagnostic() {
     setDiagResult("testando\u2026");
     if (typeof window.storage === "undefined") {
@@ -710,7 +785,11 @@ function RecomporApp() {
           .rc-hormone-grid { grid-template-columns: repeat(7, minmax(64px, 1fr)) !important; overflow-x: auto; }
           .rc-weekgrid { gap: 6px !important; }
         }
-      `), storageMissing && /* @__PURE__ */ React.createElement("div", { style: styles.topBanner }, "armazenamento n\xE3o dispon\xEDvel neste ambiente \u2014 as altera\xE7\xF5es n\xE3o v\xE3o persistir ao fechar e reabrir o app"), /* @__PURE__ */ React.createElement("div", { style: styles.diagRow }, /* @__PURE__ */ React.createElement("button", { className: "rc-btn", onClick: runDiagnostic, style: styles.diagBtn }, "testar conex\xE3o com armazenamento"), diagResult && /* @__PURE__ */ React.createElement("span", { style: { ...styles.diagResult, color: diagResult.startsWith("\u2713") ? "#6FA96F" : "#E8552A" } }, diagResult)), /* @__PURE__ */ React.createElement("div", { style: styles.header }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: styles.eyebrow }, "CICLO DE RECOMPOSI\xC7\xC3O"), /* @__PURE__ */ React.createElement("h1", { style: styles.title }, "RECOMPOR")), /* @__PURE__ */ React.createElement("div", { style: styles.phasePillRow }, PHASE_ORDER.map((k, i) => /* @__PURE__ */ React.createElement("div", { key: k, style: styles.pillWrap }, /* @__PURE__ */ React.createElement(
+      `), storageMissing && /* @__PURE__ */ React.createElement("div", { style: styles.topBanner }, "armazenamento n\xE3o dispon\xEDvel neste ambiente \u2014 as altera\xE7\xF5es n\xE3o v\xE3o persistir ao fechar e reabrir o app"), /* @__PURE__ */ React.createElement("div", { style: styles.diagRow }, /* @__PURE__ */ React.createElement("button", { className: "rc-btn", onClick: runDiagnostic, style: styles.diagBtn }, "testar conex\xE3o com armazenamento"),
+  React.createElement("button", { className: "rc-btn", onClick: exportBackup, style: styles.diagBtn }, "exportar backup JSON"),
+  React.createElement("button", { className: "rc-btn", onClick: () => importFileRef.current?.click(), style: styles.diagBtn }, "importar backup JSON"),
+  React.createElement("input", { ref: importFileRef, type: "file", accept: "application/json,.json", style: { display: "none" }, onChange: (e) => importBackupFile(e.target.files?.[0]) }),
+  diagResult && /* @__PURE__ */ React.createElement("span", { style: { ...styles.diagResult, color: diagResult.startsWith("\u2713") ? "#6FA96F" : "#E8552A" } }, diagResult)), /* @__PURE__ */ React.createElement("div", { style: styles.header }, /* @__PURE__ */ React.createElement("div", null, /* @__PURE__ */ React.createElement("div", { style: styles.eyebrow }, "CICLO DE RECOMPOSI\xC7\xC3O"), /* @__PURE__ */ React.createElement("h1", { style: styles.title }, "RECOMPOR")), /* @__PURE__ */ React.createElement("div", { style: styles.phasePillRow }, PHASE_ORDER.map((k, i) => /* @__PURE__ */ React.createElement("div", { key: k, style: styles.pillWrap }, /* @__PURE__ */ React.createElement(
     "div",
     {
       style: {
